@@ -406,7 +406,7 @@ class WICBitmapCreateCacheOption(IntFlag):
     CACHE_ON_LOAD = 0x2
 
 
-class WICDecodeOptions(IntEnum):
+class WICDecodeOption(IntEnum):
     METADATA_CACHE_ON_DEMAND = 0
     METADATA_CACHE_ON_LOAD = 0x1
 
@@ -427,7 +427,7 @@ class WICComponentType(IntFlag):
     ALL_COMPONENTS = 0x3F
 
 
-class WICComponentEnumerateOptions(IntFlag):
+class WICComponentEnumOption(IntFlag):
     DEFAULT = 0
     REFRESH = 0x1
     DISABLED = 0x80000000
@@ -479,7 +479,7 @@ class WICBitmapAlphaChannelOption(IntFlag):
     IGNORE_ALPHA = 0x2
 
 
-class WICBitmapTransformOptions(IntFlag):
+class WICBitmapTransformOption(IntFlag):
     ROTATE0 = 0
     ROTATE90 = 0x1
     ROTATE180 = 0x2
@@ -493,7 +493,7 @@ class WICBitmapLockFlag(IntFlag):
     LOCK_WRITE = 0x2
 
 
-class WICBitmapDecoderCapabilities(IntFlag):
+class WICBitmapDecoderCaps(IntFlag):
     SAME_ENCODER = 0x1
     CAN_DECODE_ALL_IMAGES = 0x2
     CAN_DECODE_SOME_IMAGES = 0x4
@@ -521,7 +521,7 @@ class WICComponentSigning(IntFlag):
     DISABLED = 0x80000000
 
 
-class WICGifLogicalScreenDescriptorProperty(IntEnum):
+class WICGifLogicalScreenDescriptorProp(IntEnum):
     """WICGifLogicalScreenDescriptorProperties"""
 
     SIGNATURE = 0x1
@@ -535,7 +535,7 @@ class WICGifLogicalScreenDescriptorProperty(IntEnum):
     DESCRIPTOR_PIXEL_ASPECT_RATIO = 0x9
 
 
-class WICGifImageDescriptorProperty(IntEnum):
+class WICGifImageDescriptorProp(IntEnum):
     """WICGifImageDescriptorProperties"""
 
     LEFT = 0x1
@@ -548,7 +548,7 @@ class WICGifImageDescriptorProperty(IntEnum):
     LOCAL_COLOR_TABLE_SIZE = 0x8
 
 
-class WICGifGraphicControlExtensionProperty(IntEnum):
+class WICGifGraphicControlExtensionProp(IntEnum):
     """WICGifGraphicControlExtensionProperties"""
 
     DISPOSAL = 0x1
@@ -558,45 +558,45 @@ class WICGifGraphicControlExtensionProperty(IntEnum):
     TRANSPARENT_COLOR_INDEX = 0x5
 
 
-class WICGifApplicationExtensionProperty(IntEnum):
+class WICGifApplicationExtensionProp(IntEnum):
     """WICGifApplicationExtensionProperties"""
 
     APPLICATION = 0x1
     DATA = 0x2
 
 
-class WICGifCommentExtensionProperty(IntEnum):
+class WICGifCommentExtensionProp(IntEnum):
     """WICGifCommentExtensionProperties"""
 
     TEXT = 0x1
 
 
-class WICJpegCommentProperty(IntEnum):
+class WICJpegCommentProp(IntEnum):
     """WICJpegCommentProperties"""
 
     TEXT = 0x1
 
 
-class WICJpegLuminanceProperty(IntEnum):
+class WICJpegLuminanceProp(IntEnum):
     """WICJpegLuminanceProperties"""
 
     TABLE = 0x1
 
 
-class WICJpegChrominanceProperty(IntEnum):
+class WICJpegChrominanceProp(IntEnum):
     """WICJpegChrominanceProperties"""
 
     TABLE = 0x1
 
 
-class WIC8BIMIptcProperty(IntEnum):
+class WIC8BIMIptcProp(IntEnum):
     """WIC8BIMIptcProperties"""
 
     P_STRING = 0
     EMBEDDED_IPTC = 0x1
 
 
-class WIC8BIMResolutionInfoProperty(IntEnum):
+class WIC8BIMResolutionInfoProp(IntEnum):
     """WIC8BIMResolutionInfoProperties"""
 
     P_STRING = 0x1
@@ -608,26 +608,26 @@ class WIC8BIMResolutionInfoProperty(IntEnum):
     HEIGHT_UNIT = 0x7
 
 
-class WIC8BIMIptcDigestProperty(IntEnum):
+class WIC8BIMIptcDigestProp(IntEnum):
     """WIC8BIMIptcDigestProperties"""
 
     P_STRING = 0x1
     IPTC_DIGEST = 0x2
 
 
-class WICPngGamaProperty(IntEnum):
+class WICPngGamaProp(IntEnum):
     """WICPngGamaProperties"""
 
     GAMMA = 0x1
 
 
-class WICPngBkgdProperty(IntEnum):
+class WICPngBkgdProp(IntEnum):
     """WICPngBkgdProperties"""
 
     BACKGROUND_COLOR = 0x1
 
 
-class WICPngItxtProperty(IntEnum):
+class WICPngItxtProp(IntEnum):
     """WICPngItxtProperties"""
 
     KEYWORD = 0x1
@@ -637,7 +637,7 @@ class WICPngItxtProperty(IntEnum):
     TEXT = 0x5
 
 
-class WICPngChrmProperty(IntEnum):
+class WICPngChrmProp(IntEnum):
     """WICPngChrmProperties"""
 
     WHITE_POINT_X = 0x1
@@ -650,26 +650,26 @@ class WICPngChrmProperty(IntEnum):
     BLUE_Y = 0x8
 
 
-class WICPngHistProperty(IntEnum):
+class WICPngHistProp(IntEnum):
     """WICPngHistProperties"""
 
     FREQUENCIES = 0x1
 
 
-class WICPngIccpProperty(IntEnum):
+class WICPngIccpProp(IntEnum):
     """WICPngIccpProperties"""
 
     PROFILE_NAME = 0x1
     PROFILE_DATA = 0x2
 
 
-class WICPngSrgbProperty(IntEnum):
+class WICPngSrgbProp(IntEnum):
     """WICPngSrgbProperties"""
 
     INTENT = 0x1
 
 
-class WICPngTimeProperty(IntEnum):
+class WICPngTimeProp(IntEnum):
     """WICPngTimeProperties"""
 
     YEAR = 0x1
@@ -680,13 +680,13 @@ class WICPngTimeProperty(IntEnum):
     SECOND = 0x6
 
 
-class WICHeifProperty(IntEnum):
+class WICHeifProp(IntEnum):
     """WICHeifProperties"""
 
     ORIENTATION = 0x1
 
 
-class WICHeifHdrProperties(IntEnum):
+class WICHeifHdrProp(IntEnum):
     """WICHeifHdrProperties"""
 
     MAXIMUM_LUMINANCE_LEVEL = 0x1
@@ -696,19 +696,19 @@ class WICHeifHdrProperties(IntEnum):
     CUSTOM_VIDEO_PRIMARIES = 0x5
 
 
-class WICWebpAnimProperty(IntEnum):
+class WICWebpAnimProp(IntEnum):
     """WICWebpAnimProperties"""
 
     LOOP_COUNT = 0x1
 
 
-class WICWebpAnmfProperty(IntEnum):
+class WICWebpAnmfProp(IntEnum):
     """WICWebpAnmfProperties"""
 
     FRAME_DURATION = 0x1
 
 
-class WICJpegXLAnimProperty(IntEnum):
+class WICJpegXLAnimProp(IntEnum):
     """WICJpegXLAnimProperties"""
 
     LOOP_COUNT = 0x1
@@ -716,7 +716,7 @@ class WICJpegXLAnimProperty(IntEnum):
     FRAME_TICKS_PER_SECOND_DENOMINATOR = 0x3
 
 
-class WICJpegXLAnimFrameProperty(IntEnum):
+class WICJpegXLAnimFrameProp(IntEnum):
     DURATION_IN_TICKS = 0x1
     NAME = 0x2
 
@@ -742,7 +742,7 @@ class WICPlanarOption(IntFlag):
     PRESERVE_SUBSAMPLING = 0x1
 
 
-class WICJpegIndexingOptions(IntFlag):
+class WICJpegIndexingOption(IntFlag):
     """WICJpegIndexingOptions"""
 
     GENERATE_ON_DEMAND = 0
@@ -887,7 +887,7 @@ class DXGIFormat(IntEnum):
     A4B4G4R4_UNORM = 191
 
 
-class D2D1_ALPHA_MODE(IntEnum):
+class D2D1AlphaMode(IntEnum):
     """D2D1_ALPHA_MODE"""
 
     UNKNOWN = 0

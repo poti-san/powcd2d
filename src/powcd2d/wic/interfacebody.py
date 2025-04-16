@@ -214,7 +214,7 @@ IWICPlanarBitmapSourceTransform._methods_ = [
             c_int32,
             c_int32,
             POINTER(WICPixelFormatGUID),
-            POINTER(WICBitmapPlaneDescription),
+            POINTER(WICBitmapPlaneDesc),
             c_uint32,
             POINTER(c_int32),
         ),

@@ -15,7 +15,9 @@ from enum import IntEnum, IntFlag
 from comtypes import GUID, IUnknown
 
 
-class DWRITE_FONT_FILE_TYPE(IntEnum):
+class DWriteFontFileType(IntEnum):
+    """DWRITE_FONT_FILE_TYPE"""
+
     UNKNOWN = 0
     CFF = 1
     TRUETYPE = 2
@@ -27,7 +29,9 @@ class DWRITE_FONT_FILE_TYPE(IntEnum):
     TRUETYPE_COLLECTION = OPENTYPE_COLLECTION
 
 
-class DWRITE_FONT_FACE_TYPE(IntEnum):
+class DWriteFontFaceType(IntEnum):
+    """DWRITE_FONT_FACE_TYPE"""
+
     CFF = 0
     TRUETYPE = 1
     OPENTYPE_COLLECTION = 2
@@ -39,13 +43,17 @@ class DWRITE_FONT_FACE_TYPE(IntEnum):
     TRUETYPE_COLLECTION = OPENTYPE_COLLECTION
 
 
-class DWRITE_FONT_SIMULATIONS(IntFlag):
+class DWriteFontSimulation(IntFlag):
+    """DWRITE_FONT_SIMULATIONS"""
+
     NONE = 0x0000
     BOLD = 0x0001
     OBLIQUE = 0x0002
 
 
-class DWRITE_FONT_WEIGHT(IntEnum):
+class DWriteFontWeight(IntEnum):
+    """DWRITE_FONT_WEIGHT"""
+
     THIN = 100
     EXTRA_LIGHT = 200
     ULTRA_LIGHT = 200
@@ -65,7 +73,9 @@ class DWRITE_FONT_WEIGHT(IntEnum):
     ULTRA_BLACK = 950
 
 
-class DWRITE_FONT_STRETCH(IntEnum):
+class DWriteFontStretch(IntEnum):
+    """DWRITE_FONT_STRETCH"""
+
     UNDEFINED = 0
     ULTRA_CONDENSED = 1
     EXTRA_CONDENSED = 2
@@ -79,13 +89,17 @@ class DWRITE_FONT_STRETCH(IntEnum):
     ULTRA_EXPANDED = 9
 
 
-class DWRITE_FONT_STYLE(IntEnum):
+class DWriteFontStyle(IntEnum):
+    """DWRITE_FONT_STYLE"""
+
     NORMAL = 0
     OBLIQUE = 1
     ITALIC = 2
 
 
-class DWRITE_INFORMATIONAL_STRING_ID(IntEnum):
+class DWriteInfoStringID(IntEnum):
+    """DWRITE_INFORMATIONAL_STRING_ID"""
+
     NONE = 0
     COPYRIGHT_NOTICE = 1
     VERSION_STRINGS = 2
@@ -108,15 +122,15 @@ class DWRITE_INFORMATIONAL_STRING_ID(IntEnum):
     WEIGHT_STRETCH_STYLE_FAMILY_NAME = 19
     DESIGN_SCRIPT_LANGUAGE_TAG = 20
     SUPPORTED_SCRIPT_LANGUAGE_TAG = 21
+    #     // Obsolete aliases kept to avoid breaking existing code.
+    #     PREFERRED_FAMILY_NAMES = TYPOGRAPHIC_FAMILY_NAMES
+    #     PREFERRED_SUBFAMILY_NAMES = TYPOGRAPHIC_SUBFAMILY_NAMES
+    #     WWS_FAMILY_NAME = WEIGHT_STRETCH_STYLE_FAMILY_NAME
 
 
-#     // Obsolete aliases kept to avoid breaking existing code.
-#     PREFERRED_FAMILY_NAMES = TYPOGRAPHIC_FAMILY_NAMES
-#     PREFERRED_SUBFAMILY_NAMES = TYPOGRAPHIC_SUBFAMILY_NAMES
-#     WWS_FAMILY_NAME = WEIGHT_STRETCH_STYLE_FAMILY_NAME
+class DWriteFontMetrics(Structure):
+    """DWRITE_FONT_METRICS"""
 
-
-class DWRITE_FONT_METRICS(Structure):
     __slots__ = ()
     _fields_ = (
         ("design_units_per_em", c_uint16),
@@ -132,7 +146,9 @@ class DWRITE_FONT_METRICS(Structure):
     )
 
 
-class DWRITE_GLYPH_METRICS(Structure):
+class DWriteGlyphMetrics(Structure):
+    """DWRITE_GLYPH_METRICS"""
+
     __slots__ = ()
     _fields_ = (
         ("left_side_bearing", c_int32),
@@ -145,7 +161,9 @@ class DWRITE_GLYPH_METRICS(Structure):
     )
 
 
-class DWRITE_GLYPH_OFFSET(Structure):
+class DWriteGlyphOffset(Structure):
+    """DWRITE_GLYPH_OFFSET"""
+
     __slots__ = ()
     _fields_ = (
         ("advance_offset", c_float),
@@ -153,18 +171,24 @@ class DWRITE_GLYPH_OFFSET(Structure):
     )
 
 
-class DWRITE_FACTORY_TYPE(IntEnum):
+class DWriteFactoryType(IntEnum):
+    """DWRITE_FACTORY_TYPE"""
+
     SHARED = 0
     ISOLATED = 1
 
 
-class DWRITE_PIXEL_GEOMETRY(IntEnum):
+class DWritePixelGeometry(IntEnum):
+    """DWRITE_PIXEL_GEOMETRY"""
+
     FLAT = 0
     RGB = 1
     BGR = 2
 
 
-class DWRITE_RENDERING_MODE(IntEnum):
+class DWriteRenderingMode(IntEnum):
+    """DWRITE_RENDERING_MODE"""
+
     DEFAULT = 0
     ALIASED = 1
     GDI_CLASSIC = 2
@@ -172,16 +196,16 @@ class DWRITE_RENDERING_MODE(IntEnum):
     NATURAL = 4
     NATURAL_SYMMETRIC = 5
     OUTLINE = 6
+    # // obsolete
+    # DWRITE_RENDERING_MODE_CLEARTYPE_GDI_CLASSIC         = DWRITE_RENDERING_MODE_GDI_CLASSIC,
+    # DWRITE_RENDERING_MODE_CLEARTYPE_GDI_NATURAL         = DWRITE_RENDERING_MODE_GDI_NATURAL,
+    # DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL             = DWRITE_RENDERING_MODE_NATURAL,
+    # DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL_SYMMETRIC   = DWRITE_RENDERING_MODE_NATURAL_SYMMETRIC
 
 
-#     // obsolete
-#     DWRITE_RENDERING_MODE_CLEARTYPE_GDI_CLASSIC         = DWRITE_RENDERING_MODE_GDI_CLASSIC,
-#     DWRITE_RENDERING_MODE_CLEARTYPE_GDI_NATURAL         = DWRITE_RENDERING_MODE_GDI_NATURAL,
-#     DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL             = DWRITE_RENDERING_MODE_NATURAL,
-#     DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL_SYMMETRIC   = DWRITE_RENDERING_MODE_NATURAL_SYMMETRIC
+class DWriteMatrix(Structure):
+    """DWRITE_MATRIX"""
 
-
-class DWRITE_MATRIX(Structure):
     __slots__ = ()
     _fields_ = (
         ("m11", c_float),
@@ -193,34 +217,44 @@ class DWRITE_MATRIX(Structure):
     )
 
 
-class DWRITE_READING_DIRECTION(IntEnum):
+class DWriteReadingDirection(IntEnum):
+    """DWRITE_READING_DIRECTION"""
+
     LEFT_TO_RIGHT = 0
     RIGHT_TO_LEFT = 1
     TOP_TO_BOTTOM = 2
     BOTTOM_TO_TOP = 3
 
 
-class DWRITE_FLOW_DIRECTION(IntEnum):
+class DWriteFlowDirection(IntEnum):
+    """DWRITE_FLOW_DIRECTION"""
+
     TOP_TO_BOTTOM = 0
     BOTTOM_TO_TOP = 1
     LEFT_TO_RIGHT = 2
     RIGHT_TO_LEFT = 3
 
 
-class DWRITE_TEXT_ALIGNMENT(IntEnum):
+class DWriteTextAlign(IntEnum):
+    """DWRITE_TEXT_ALIGNMENT"""
+
     LEADING = 0
     TRAILING = 1
     CENTER = 2
     JUSTIFIED = 3
 
 
-class DWRITE_PARAGRAPH_ALIGNMENT(IntEnum):
+class DWriteParagraphAlign(IntEnum):
+    """DWRITE_PARAGRAPH_ALIGNMENT"""
+
     NEAR = 0
     FAR = 1
     CENTER = 2
 
 
-class DWRITE_WORD_WRAPPING(IntEnum):
+class DWriteWordWrap(IntEnum):
+    """DWRITE_WORD_WRAPPING"""
+
     WRAP = 0
     NO_WRAP = 1
     EMERGENCY_BREAK = 2
@@ -228,13 +262,17 @@ class DWRITE_WORD_WRAPPING(IntEnum):
     CHARACTER = 4
 
 
-class DWRITE_LINE_SPACING_METHOD(IntEnum):
+class DWriteLineSpacingMethod(IntEnum):
+    """DWRITE_LINE_SPACING_METHOD"""
+
     DEFAULT = 0
     UNIFORM = 1
     PROPORTIONAL = 2
 
 
-class DWRITE_TRIMMING_GRANULARITY(IntEnum):
+class DWriteTrimmingGranularity(IntEnum):
+    """DWRITE_TRIMMING_GRANULARITY"""
+
     NONE = 0
     CHARACTER = 1
     WORD = 2
@@ -244,7 +282,9 @@ def dwrite_make_opentype_tag(fourcc_str: str) -> int:
     return int.from_bytes(fourcc_str.encode("ascii"), byteorder="little")
 
 
-class DWRITE_FONT_FEATURE_TAG(IntEnum):
+class DWriteFontFeatureTag(IntEnum):
+    """DWRITE_FONT_FEATURE_TAG"""
+
     ALTERNATIVE_FRACTIONS = dwrite_make_opentype_tag("afrc")
     PETITE_CAPITALS_FROM_CAPITALS = dwrite_make_opentype_tag("c2pc")
     SMALL_CAPITALS_FROM_CAPITALS = dwrite_make_opentype_tag("c2sc")
@@ -328,7 +368,9 @@ class DWRITE_FONT_FEATURE_TAG(IntEnum):
     SLASHED_ZERO = dwrite_make_opentype_tag("zero")
 
 
-class DWRITE_TEXT_RANGE(Structure):
+class DWriteTextRange(Structure):
+    """DWRITE_TEXT_RANGE"""
+
     __slots__ = ()
     _fields_ = (
         ("start_position", c_uint32),
@@ -336,7 +378,9 @@ class DWRITE_TEXT_RANGE(Structure):
     )
 
 
-class DWRITE_FONT_FEATURE(Structure):
+class DWriteFontFeature(Structure):
+    """DWRITE_FONT_FEATURE"""
+
     __slots__ = ()
     _fields_ = (
         ("_name_tag", c_int32),  # DWRITE_FONT_FEATURE_TAG
@@ -344,23 +388,27 @@ class DWRITE_FONT_FEATURE(Structure):
     )
 
     @property
-    def name_tag(self) -> DWRITE_FONT_FEATURE_TAG:
-        return DWRITE_FONT_FEATURE_TAG(self._name_tag)
+    def name_tag(self) -> DWriteFontFeatureTag:
+        return DWriteFontFeatureTag(self._name_tag)
 
     @name_tag.setter
-    def name_tag(self, value: DWRITE_FONT_FEATURE_TAG) -> None:
+    def name_tag(self, value: DWriteFontFeatureTag) -> None:
         self._name_tag = value
 
 
-class DWRITE_TYPOGRAPHIC_FEATURES(Structure):
+class DWriteTypegraphicFeatures(Structure):
+    """DWRITE_TYPOGRAPHIC_FEATURES"""
+
     __slots__ = ()
     _fields_ = (
-        ("features", POINTER(DWRITE_FONT_FEATURE)),
+        ("features", POINTER(DWriteFontFeature)),
         ("feature_count", c_uint32),
     )
 
 
-class DWRITE_TRIMMING(Structure):
+class DWriteTrimming(Structure):
+    """DWRITE_TRIMMING"""
+
     __slots__ = ()
     _fields_ = (
         ("_granularity", c_int32),
@@ -369,20 +417,24 @@ class DWRITE_TRIMMING(Structure):
     )
 
     @property
-    def granularity(self) -> DWRITE_TRIMMING_GRANULARITY:
-        return DWRITE_TRIMMING_GRANULARITY(self._granularity)
+    def granularity(self) -> DWriteTrimmingGranularity:
+        return DWriteTrimmingGranularity(self._granularity)
 
     @granularity.setter
-    def granularity(self, value: DWRITE_TRIMMING_GRANULARITY) -> None:
+    def granularity(self, value: DWriteTrimmingGranularity) -> None:
         self._granularity = value
 
 
-class DWRITE_SCRIPT_SHAPES(IntEnum):
+class DWriteScriptShape(IntEnum):
+    """DWRITE_SCRIPT_SHAPES"""
+
     DEFAULT = 0
     NO_VISUAL = 1
 
 
-class DWRITE_SCRIPT_ANALYSIS(Structure):
+class DWriteScriptAnalysis(Structure):
+    """DWRITE_SCRIPT_ANALYSIS"""
+
     __slots__ = ()
     _fields_ = (
         ("script", c_uint16),
@@ -390,22 +442,26 @@ class DWRITE_SCRIPT_ANALYSIS(Structure):
     )
 
     @property
-    def shapes(self) -> DWRITE_SCRIPT_SHAPES:
-        return DWRITE_SCRIPT_SHAPES(self._shapes)
+    def shapes(self) -> DWriteScriptShape:
+        return DWriteScriptShape(self._shapes)
 
     @shapes.setter
-    def shapes(self, value: DWRITE_SCRIPT_SHAPES) -> None:
+    def shapes(self, value: DWriteScriptShape) -> None:
         self._shapes = value
 
 
-class DWRITE_BREAK_CONDITION(IntEnum):
+class DWriteBreakCondition(IntEnum):
+    """DWRITE_BREAK_CONDITION"""
+
     NEUTRAL = 0
     CAN_BREAK = 1
     MAY_NOT_BREAK = 2
     MUST_BREAK = 3
 
 
-class DWRITE_LINE_BREAKPOINT(Structure):
+class DWriteLineBreakpoint(Structure):
+    """DWRITE_LINE_BREAKPOINT"""
+
     __slots__ = ()
     _fields_ = (("_x", c_uint8),)
     #     UINT8 breakConditionBefore  : 2;
@@ -415,21 +471,21 @@ class DWRITE_LINE_BREAKPOINT(Structure):
     #     UINT8 padding               : 2;
 
     @property
-    def break_condition_before(self) -> DWRITE_BREAK_CONDITION:
-        return DWRITE_BREAK_CONDITION((self._x & 0b00000011) >> 0)
+    def break_condition_before(self) -> DWriteBreakCondition:
+        return DWriteBreakCondition((self._x & 0b00000011) >> 0)
 
     @break_condition_before.setter
-    def break_condition_before(self, value: DWRITE_BREAK_CONDITION) -> None:
+    def break_condition_before(self, value: DWriteBreakCondition) -> None:
         if not (0 <= int(value) <= 0b00000011):
             raise ValueError
         self._x = (self._x & ~0b00000011) | (int(value) << 0)
 
     @property
-    def break_condition_after(self) -> DWRITE_BREAK_CONDITION:
-        return DWRITE_BREAK_CONDITION((self._x & 0b00001100) >> 2)
+    def break_condition_after(self) -> DWriteBreakCondition:
+        return DWriteBreakCondition((self._x & 0b00001100) >> 2)
 
     @break_condition_before.setter
-    def break_condition_before(self, value: DWRITE_BREAK_CONDITION) -> None:
+    def break_condition_before(self, value: DWriteBreakCondition) -> None:
         if not (0 <= int(value) <= 0b00000011):
             raise ValueError
         self._x = (self._x & ~0b00001100) | (int(value) << 2)
@@ -461,7 +517,9 @@ class DWRITE_LINE_BREAKPOINT(Structure):
         self._x = (self._x & ~0b11000000) | (int(value) << 6)
 
 
-class DWRITE_NUMBER_SUBSTITUTION_METHOD(IntEnum):
+class DWriteNumberSubstitutionMethod(IntEnum):
+    """DWRITE_NUMBER_SUBSTITUTION_METHOD"""
+
     FROM_CULTURE = 0
     CONTEXTUAL = 1
     NONE = 2
@@ -469,7 +527,9 @@ class DWRITE_NUMBER_SUBSTITUTION_METHOD(IntEnum):
     TRADITIONAL = 4
 
 
-class DWRITE_SHAPING_TEXT_PROPERTIES(Structure):
+class DWriteShapingTextProps(Structure):
+    """DWRITE_SHAPING_TEXT_PROPERTIES"""
+
     __slots__ = ()
     _fields_ = (("_x", c_uint16),)
 
@@ -508,7 +568,9 @@ class DWRITE_SHAPING_TEXT_PROPERTIES(Structure):
         self._x = (self._x & ~0b11111111_11111000) | (int(value) << 3)
 
 
-class DWRITE_SHAPING_GLYPH_PROPERTIES(Structure):
+class DWriteShapingGlyphProps(Structure):
+    """DWRITE_SHAPING_GLYPH_PROPERTIES"""
+
     __slots__ = ()
     _fields_ = (("_x", c_uint16),)
     #     UINT16 justification        : 4;
@@ -562,11 +624,15 @@ class DWRITE_SHAPING_GLYPH_PROPERTIES(Structure):
         self._x = (self._x & ~0b11111111_10000000) | (int(value) << 7)
 
 
-class DWRITE_GLYPH_RUN(Structure):
+class DWriteGlyphRun(Structure):
+    """DWRITE_GLYPH_RUN"""
+
     __slots__ = ()
 
 
-class DWRITE_GLYPH_RUN_DESCRIPTION(Structure):
+class DWriteGlyphRunDesc(Structure):
+    """DWRITE_GLYPH_RUN_DESCRIPTION"""
+
     __slots__ = ()
     _fields_ = (
         ("locale_name", c_wchar_p),
@@ -577,7 +643,9 @@ class DWRITE_GLYPH_RUN_DESCRIPTION(Structure):
     )
 
 
-class DWRITE_UNDERLINE(Structure):
+class DWriteUnderline(Structure):
+    """DWRITE_UNDERLINE"""
+
     __slots__ = ()
     _fields_ = (
         ("width", c_float),
@@ -591,7 +659,9 @@ class DWRITE_UNDERLINE(Structure):
     )
 
 
-class DWRITE_STRIKETHROUGH(Structure):
+class DWriteStrikethrough(Structure):
+    """DWRITE_STRIKETHROUGH"""
+
     __slots__ = ()
     _fields_ = (
         ("width", c_float),
@@ -605,7 +675,9 @@ class DWRITE_STRIKETHROUGH(Structure):
     )
 
 
-class DWRITE_LINE_METRICS(Structure):
+class DWriteLineMetrics(Structure):
+    """DWRITE_LINE_METRICS"""
+
     __slots__ = ()
     _fields_ = (
         ("length", c_uint32),
@@ -617,7 +689,9 @@ class DWRITE_LINE_METRICS(Structure):
     )
 
 
-class DWRITE_CLUSTER_METRICS(Structure):
+class DWriteClusterMetrics(Structure):
+    """DWRITE_CLUSTER_METRICS"""
+
     __slots__ = ()
     _fields_ = (
         ("width", c_float),
@@ -682,7 +756,9 @@ class DWRITE_CLUSTER_METRICS(Structure):
         self.x = (self.x & ~0b11111111_11100000) | (value << 13)
 
 
-class DWRITE_TEXT_METRICS(Structure):
+class DWriteTextMetrics(Structure):
+    """DWRITE_TEXT_METRICS"""
+
     __slots__ = ()
     _fields_ = (
         ("left", c_float),
@@ -697,7 +773,9 @@ class DWRITE_TEXT_METRICS(Structure):
     )
 
 
-class DWRITE_INLINE_OBJECT_METRICS(Structure):
+class DWriteInlineObjectMetrics(Structure):
+    """DWRITE_INLINE_OBJECT_METRICS"""
+
     __slots__ = ()
     _fields_ = (
         ("width", c_float),
@@ -706,7 +784,9 @@ class DWRITE_INLINE_OBJECT_METRICS(Structure):
     )
 
 
-class DWRITE_OVERHANG_METRICS(Structure):
+class DWriteOverhangMetrics(Structure):
+    """DWRITE_OVERHANG_METRICS"""
+
     __slots__ = ()
     _fields_ = (
         ("left", c_float),
@@ -716,7 +796,9 @@ class DWRITE_OVERHANG_METRICS(Structure):
     )
 
 
-class DWRITE_HIT_TEST_METRICS(Structure):
+class DWriteHitTestMetrics(Structure):
+    """DWRITE_HIT_TEST_METRICS"""
+
     __slots__ = ()
     _fields_ = (
         ("text_position", c_uint32),
@@ -731,7 +813,9 @@ class DWRITE_HIT_TEST_METRICS(Structure):
     )
 
 
-class DWRITE_TEXTURE_TYPE(IntEnum):
+class DWriteTextureType(IntEnum):
+    """DWRITE_TEXTURE_TYPE"""
+
     ALIASED_1x1 = 0
     CLEARTYPE_3x1 = 1
 

@@ -71,7 +71,7 @@ class WICImageParameters(Structure):
     )
 
 
-class WICBitmapPlaneDescription(Structure):
+class WICBitmapPlaneDesc(Structure):
     __slots__ = ()
     _fields_ = (("format", WICPixelFormatGUID), ("width", c_uint32), ("height", c_uint32))
 

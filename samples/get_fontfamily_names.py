@@ -1,6 +1,6 @@
-from powcd2d.dwrite import DWRITE_FACTORY_TYPE, DWriteFactory
+from powcd2d.dwrite import DWriteFactory, DWriteFactoryType
 
-factory = DWriteFactory.create(DWRITE_FACTORY_TYPE.SHARED)
+factory = DWriteFactory.create(DWriteFactoryType.SHARED)
 sysfontcol = factory.systemfontcollection
 fontfamilies = sysfontcol.fontfamilies
 for fontfamily in fontfamilies:

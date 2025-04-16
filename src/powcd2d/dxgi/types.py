@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 from comtypes import GUID, IUnknown
 
 
-class DXGI_FORMAT(IntEnum):
+class DXGIFormat(IntEnum):
     """DXGI_FORMAT"""
 
     UNKNOWN = 0
@@ -140,7 +140,7 @@ class DXGI_FORMAT(IntEnum):
     A4B4G4R4_UNORM = 191
 
 
-class DXGI_RATIONAL(Structure):
+class DXGIRational(Structure):
     """DXGI_RATIONAL"""
 
     __slots__ = ()
@@ -150,17 +150,21 @@ class DXGI_RATIONAL(Structure):
     )
 
 
-class DXGI_SAMPLE_DESC_QUALITY(IntEnum):
+class DXGISampleDescQuality(IntEnum):
+    """DXGI_SAMPLE_DESC_QUALITY"""
+
     DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN = 0xFFFFFFFF
     DXGI_CENTER_MULTISAMPLE_QUALITY_PATTERN = 0xFFFFFFFE
 
 
-class DXGI_SAMPLE_DESC(Structure):
+class DXGISampleDesc(Structure):
+    """DXGI_SAMPLE_DESC"""
+
     __slots__ = ()
     _fields_ = (("count", c_uint32), ("quality", c_uint32))
 
 
-class DXGI_COLOR_SPACE_TYPE(IntEnum):
+class DXGIColorSpaceType(IntEnum):
     """DXGI_COLOR_SPACE_TYPE"""
 
     RGB_FULL_G22_NONE_P709 = 0
@@ -198,7 +202,9 @@ from enum import IntEnum
 # #define MAKE_DXGI_STATUS(code)  MAKE_HRESULT(0, _FACDXGI, code)
 
 
-class DXGI_CPU_ACCESS(IntEnum):
+class DXGICpuAccess(IntEnum):
+    """DXGI_CPU_ACCESS"""
+
     NONE = 0
     DYNAMIC = 1
     READ_WRITE = 2
@@ -206,35 +212,36 @@ class DXGI_CPU_ACCESS(IntEnum):
     FIELD = 15
 
 
-class DXGI_RGB(Structure):
+class DXGIRGB(Structure):
     """DXGI_RGB"""
 
     __slots__ = ()
     _fields_ = (("red", c_float), ("green", c_float), ("blue", c_float))
 
 
-class D3DCOLORVALUE(Structure):
+class D3DColorValue(Structure):
     """D3DCOLORVALUE"""
 
     __slots__ = ()
     _fields_ = (("r", c_float), ("g", c_float), ("b", c_float), ("a", c_float))
 
 
-DXGI_RGBA = D3DCOLORVALUE
+DXGIRGBA = D3DColorValue
+"""DXGI_RGBA"""
 
 
-class DXGI_GAMMA_CONTROL(Structure):
+class DXGIGammaControl(Structure):
     """DXGI_GAMMA_CONTROL"""
 
     __slots__ = ()
     _fields_ = (
-        ("scale", DXGI_RGB),
-        ("offset", DXGI_RGB),
-        ("gammacurve", DXGI_RGB * 1025),
+        ("scale", DXGIRGB),
+        ("offset", DXGIRGB),
+        ("gammacurve", DXGIRGB * 1025),
     )
 
 
-class DXGI_GAMMA_CONTROL_CAPABILITIES(Structure):
+class DXGIGammaControlCaps(Structure):
     """DXGI_GAMMA_CONTROL_CAPABILITIES"""
 
     __slots__ = ()
@@ -247,20 +254,26 @@ class DXGI_GAMMA_CONTROL_CAPABILITIES(Structure):
     )
 
 
-class DXGI_MODE_SCANLINE_ORDER(IntEnum):
+class DXGIModeScanlineOrder(IntEnum):
+    """DXGI_MODE_SCANLINE_ORDER"""
+
     UNSPECIFIED = 0
     PROGRESSIVE = 1
     UPPER_FIELD_FIRST = 2
     LOWER_FIELD_FIRST = 3
 
 
-class DXGI_MODE_SCALING(IntEnum):
+class DXGIModeScaling(IntEnum):
+    """DXGI_MODE_SCALING"""
+
     UNSPECIFIED = 0
     CENTERED = 1
     STRETCHED = 2
 
 
-class DXGI_MODE_ROTATION(IntEnum):
+class DXGIModeRotation(IntEnum):
+    """DXGI_MODE_ROTATION"""
+
     UNSPECIFIED = 0
     IDENTITY = 1
     ROTATE90 = 2
@@ -268,7 +281,9 @@ class DXGI_MODE_ROTATION(IntEnum):
     ROTATE270 = 4
 
 
-class DXGI_MODE_DESC(Structure):
+class DXGIModeDesc(Structure):
+    """DXGI_MODE_DESC"""
+
     __slots__ = ()
     _fields_ = (
         ("width", c_uint32),
@@ -280,7 +295,7 @@ class DXGI_MODE_DESC(Structure):
     )
 
 
-class DXGI_JPEG_DC_HUFFMAN_TABLE(Structure):
+class DXGIJpegDCHuffmanTable(Structure):
     """DXGI_JPEG_DC_HUFFMAN_TABLE"""
 
     __slots__ = ()
@@ -290,7 +305,7 @@ class DXGI_JPEG_DC_HUFFMAN_TABLE(Structure):
     )
 
 
-class DXGI_JPEG_AC_HUFFMAN_TABLE(Structure):
+class DXGIJpegACHuffmanTable(Structure):
     """DXGI_JPEG_AC_HUFFMAN_TABLE"""
 
     __slots__ = ()
@@ -300,17 +315,20 @@ class DXGI_JPEG_AC_HUFFMAN_TABLE(Structure):
     )
 
 
-class DXGI_JPEG_QUANTIZATION_TABLE(Structure):
+class DXGIJpegQuantizationTable(Structure):
     """DXGI_JPEG_QUANTIZATION_TABLE"""
 
     __slots__ = ()
     _fields_ = (("elements", c_byte * 64),)
 
 
-D2D_COLOR_F = D3DCOLORVALUE
+D2DColorF = D3DColorValue
+"""D2D_COLOR_F"""
 
 
-class DXGI_USAGE(IntFlag):
+class DXGIUsage(IntFlag):
+    """DXGI_USAGE"""
+
     SHADER_INPUT = 0x00000010
     RENDER_TARGET_OUTPUT = 0x00000020
     BACK_BUFFER = 0x00000040
@@ -320,7 +338,9 @@ class DXGI_USAGE(IntFlag):
     UNORDERED_ACCESS = 0x00000400
 
 
-class DXGI_FRAME_STATISTICS(Structure):
+class DXGIFrameStats(Structure):
+    """DXGI_FRAME_STATISTICS"""
+
     __slots__ = ()
     _fields_ = (
         ("present_count", c_uint32),
@@ -331,7 +351,9 @@ class DXGI_FRAME_STATISTICS(Structure):
     )
 
 
-class DXGI_MAPPED_RECT(Structure):
+class DXGIMappedRect(Structure):
+    """DXGI_MAPPED_RECT"""
+
     __slots__ = ()
     _fields_ = (
         ("pitch", c_int32),
@@ -349,7 +371,7 @@ class LUID(Structure):
     )
 
 
-class DXGI_ADAPTER_DESC(Structure):
+class DXGIAdapterDesc(Structure):
     """DXGI_ADAPTER_DESC構造体。"""
 
     __slots__ = ()
@@ -374,7 +396,7 @@ class DXGI_ADAPTER_DESC(Structure):
         adapater_luid: LUID
 
 
-class DXGI_OUTPUT_DESC(Structure):
+class DXGIOutputDesc(Structure):
     """DXGI_OUTPUT_DESC構造体。"""
 
     __slots__ = ()
@@ -393,22 +415,22 @@ class DXGI_OUTPUT_DESC(Structure):
         monitor: int
 
     @property
-    def rotation(self) -> DXGI_MODE_ROTATION:
-        return DXGI_MODE_ROTATION(self._rotation)
+    def rotation(self) -> DXGIModeRotation:
+        return DXGIModeRotation(self._rotation)
 
     @rotation.setter
-    def rotation(self, value: DXGI_MODE_ROTATION) -> None:
+    def rotation(self, value: DXGIModeRotation) -> None:
         self._rotation = int(value)
 
 
-class DXGI_SHARED_RESOURCE(Structure):
+class DXGISharedResource(Structure):
     """DXGI_SHARED_RESOURCE構造体。"""
 
     __slots__ = ()
     _fields_ = (("handle", c_void_p),)
 
 
-class DXGI_RESOURCE_PRIORITY(IntEnum):
+class DXGIResourcePriority(IntEnum):
     """DXGI_RESOURCE_PRIORITY_*定数。"""
 
     MINIMUM = 0x28000000
@@ -418,7 +440,7 @@ class DXGI_RESOURCE_PRIORITY(IntEnum):
     MAXIMUM = 0xC8000000
 
 
-class DXGI_RESIDENCY(IntEnum):
+class DXGIResidency(IntEnum):
     """DXGI_RESIDENCY列挙型。"""
 
     FULLY_RESIDENT = 1
@@ -426,7 +448,9 @@ class DXGI_RESIDENCY(IntEnum):
     EVICTED_TO_DISK = 3
 
 
-class DXGI_SURFACE_DESC(Structure):
+class DXGISurfaceDesc(Structure):
+    """DXGI_SURFACE_DESC"""
+
     __slots__ = ()
     _fields_ = (
         ("width", c_uint32),
@@ -436,23 +460,23 @@ class DXGI_SURFACE_DESC(Structure):
     )
 
     @property
-    def format(self) -> DXGI_FORMAT:
-        return DXGI_FORMAT(self._format)
+    def format(self) -> DXGIFormat:
+        return DXGIFormat(self._format)
 
     @format.setter
-    def format(self, value: DXGI_FORMAT) -> None:
+    def format(self, value: DXGIFormat) -> None:
         self._format = int(value)
 
     @property
-    def sample_desc(self) -> DXGI_SAMPLE_DESC:
-        return DXGI_SAMPLE_DESC(self._format)
+    def sample_desc(self) -> DXGISampleDesc:
+        return DXGISampleDesc(self._format)
 
     @sample_desc.setter
-    def sample_desc(self, value: DXGI_SAMPLE_DESC) -> None:
+    def sample_desc(self, value: DXGISampleDesc) -> None:
         self._format = int(value)
 
 
-class DXGI_SWAP_EFFECT(IntEnum):
+class DXGISwapEffect(IntEnum):
     """DXGI_SWAP_EFFECT列挙型。"""
 
     DISCARD = 0
@@ -461,7 +485,7 @@ class DXGI_SWAP_EFFECT(IntEnum):
     FLIP_DISCARD = 4
 
 
-class DXGI_SWAP_CHAIN_FLAG(IntEnum):
+class DXGISwapChainFlag(IntEnum):
     """DXGI_SWAP_CHAIN_FLAG列挙型。"""
 
     NONPREROTATED = 1
@@ -479,13 +503,13 @@ class DXGI_SWAP_CHAIN_FLAG(IntEnum):
     RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = 4096
 
 
-class DXGI_SWAP_CHAIN_DESC(Structure):
+class DXGISwapChainDesc(Structure):
     """DXGI_SWAP_CHAIN_DESC構造体。"""
 
     __slots__ = ()
     _fields_ = (
-        ("buffer_desc", DXGI_MODE_DESC),
-        ("sample_desc", DXGI_SAMPLE_DESC),
+        ("buffer_desc", DXGIModeDesc),
+        ("sample_desc", DXGISampleDesc),
         ("_buffer_usage", c_int32),
         ("buffer_count", c_int32),
         ("output_window", c_void_p),
@@ -495,23 +519,23 @@ class DXGI_SWAP_CHAIN_DESC(Structure):
     )
 
     @property
-    def buffer_usage(self) -> DXGI_USAGE:
-        return DXGI_USAGE(self._buffer_usage)
+    def buffer_usage(self) -> DXGIUsage:
+        return DXGIUsage(self._buffer_usage)
 
     @buffer_usage.setter
-    def buffer_usage(self, value: DXGI_USAGE) -> None:
+    def buffer_usage(self, value: DXGIUsage) -> None:
         self._buffer_usage = int(value)
 
     @property
-    def swap_effect(self) -> DXGI_SWAP_EFFECT:
-        return DXGI_SWAP_EFFECT(self._buffer_usage)
+    def swap_effect(self) -> DXGISwapEffect:
+        return DXGISwapEffect(self._buffer_usage)
 
     @swap_effect.setter
-    def swap_effect(self, value: DXGI_SWAP_EFFECT) -> None:
+    def swap_effect(self, value: DXGISwapEffect) -> None:
         self._buffer_usage = int(value)
 
 
-class DXGI_MAP(IntFlag):
+class DXGIMap(IntFlag):
     """DXGI_MAP_*定数。"""
 
     READ = 1
@@ -519,7 +543,7 @@ class DXGI_MAP(IntFlag):
     DISCARD = 4
 
 
-class DXGI_ENUM_MODES(IntFlag):
+class DXGIEnumMode(IntFlag):
     """DXGI_ENUM_MODES_*定数。"""
 
     INTERLACED = 1
@@ -529,7 +553,7 @@ class DXGI_ENUM_MODES(IntFlag):
 DXGI_MAX_SWAP_CHAIN_BUFFERS = 16
 
 
-class DXGI_PRESENT(IntFlag):
+class DXGIPresent(IntFlag):
     """DXGI_PRESENT_*定数。"""
 
     TEST = 0x00000001
@@ -543,7 +567,7 @@ class DXGI_PRESENT(IntFlag):
     ALLOW_TEARING = 0x00000200
 
 
-class DXGI_ADAPTER_FLAG(IntFlag):
+class DXGIAdapterFlag(IntFlag):
     """DXGI_ADAPTER_FLAG列挙型。"""
 
     NONE = 0
@@ -551,7 +575,7 @@ class DXGI_ADAPTER_FLAG(IntFlag):
     SOFTWARE = 2
 
 
-class DXGI_ADAPTER_DESC1(Structure):
+class DXGIAdapterDesc1(Structure):
     """DXGI_ADAPTER_DESC1構造体。"""
 
     __slots__ = ()
@@ -568,7 +592,7 @@ class DXGI_ADAPTER_DESC1(Structure):
     )
 
 
-class DXGI_DISPLAY_COLOR_SPACE(Structure):
+class DXGIDisplayColorSpace(Structure):
     """DXGI_DISPLAY_COLOR_SPACE構造体"""
 
     __slots__ = ()

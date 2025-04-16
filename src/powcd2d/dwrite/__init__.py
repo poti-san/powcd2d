@@ -115,28 +115,28 @@ class DWriteFont:
         return self.fontfamily_nothrow.value
 
     @property
-    def weight_nothrow(self) -> ComResult[DWRITE_FONT_WEIGHT]:
-        return cr(S_OK, DWRITE_FONT_WEIGHT(self.__o.GetWeight()))
+    def weight_nothrow(self) -> ComResult[DWriteFontWeight]:
+        return cr(S_OK, DWriteFontWeight(self.__o.GetWeight()))
 
     @property
-    def weight(self) -> DWRITE_FONT_WEIGHT:
-        return DWRITE_FONT_WEIGHT(self.__o.GetWeight())
+    def weight(self) -> DWriteFontWeight:
+        return DWriteFontWeight(self.__o.GetWeight())
 
     @property
-    def stretch_nothrow(self) -> ComResult[DWRITE_FONT_STRETCH]:
-        return cr(S_OK, DWRITE_FONT_STRETCH(self.__o.GetStretch()))
+    def stretch_nothrow(self) -> ComResult[DWriteFontStretch]:
+        return cr(S_OK, DWriteFontStretch(self.__o.GetStretch()))
 
     @property
-    def stretch(self) -> DWRITE_FONT_STRETCH:
-        return DWRITE_FONT_STRETCH(self.__o.GetStretch())
+    def stretch(self) -> DWriteFontStretch:
+        return DWriteFontStretch(self.__o.GetStretch())
 
     @property
-    def style_nothrow(self) -> ComResult[DWRITE_FONT_STYLE]:
-        return cr(S_OK, DWRITE_FONT_STYLE(self.__o.GetStretch()))
+    def style_nothrow(self) -> ComResult[DWriteFontStyle]:
+        return cr(S_OK, DWriteFontStyle(self.__o.GetStretch()))
 
     @property
-    def style(self) -> DWRITE_FONT_STYLE:
-        return DWRITE_FONT_STYLE(self.__o.GetStretch())
+    def style(self) -> DWriteFontStyle:
+        return DWriteFontStyle(self.__o.GetStretch())
 
     @property
     def is_symbolfont_nothrow(self) -> ComResult[bool]:
@@ -377,12 +377,12 @@ class DWriteFactory:
         return self.__o
 
     @staticmethod
-    def create_nothrow(factorytype: DWRITE_FACTORY_TYPE) -> "ComResult[DWriteFactory]":
+    def create_nothrow(factorytype: DWriteFactoryType) -> "ComResult[DWriteFactory]":
         x = POINTER(IDWriteFactory)()
         return cr(_DWriteCreateFactory(int(factorytype), IDWriteFactory._iid_, byref(x)), DWriteFactory(x))
 
     @staticmethod
-    def create(factorytype: DWRITE_FACTORY_TYPE) -> "DWriteFactory":
+    def create(factorytype: DWriteFactoryType) -> "DWriteFactory":
         return DWriteFactory.create_nothrow(factorytype).value
 
     @property

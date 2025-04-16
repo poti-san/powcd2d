@@ -104,12 +104,12 @@ class DXGIAdapter(DXGIObject):
         raise OverflowError
 
     @property
-    def desc_nothrow(self) -> ComResult[DXGI_ADAPTER_DESC]:
-        x = DXGI_ADAPTER_DESC()
+    def desc_nothrow(self) -> ComResult[DXGIAdapterDesc]:
+        x = DXGIAdapterDesc()
         return cr(self.__o.GetDesc(byref(x)), x)
 
     @property
-    def desc(self) -> DXGI_ADAPTER_DESC:
+    def desc(self) -> DXGIAdapterDesc:
         return self.desc_nothrow.value
 
     def check_interfacesupport_nothrow(self, iid: GUID) -> ComResult[bool]:
@@ -210,29 +210,29 @@ class DXGIDevice(DXGIObject):
 
     def query_resourceresidency_nothrow(
         self, resources: Sequence[IUnknownWrapper]
-    ) -> ComResult[tuple[DXGI_RESIDENCY, ...]]:
+    ) -> ComResult[tuple[DXGIResidency, ...]]:
         l = len(resources)
         a = (POINTER(IUnknown) * l)(resource.wrapped_obj for resource in resources)
         x = (c_int32 * l)()
-        return cr(self.__o.QueryResourceResidency(a, x, l), tuple(DXGI_RESIDENCY(i) for i in x))
+        return cr(self.__o.QueryResourceResidency(a, x, l), tuple(DXGIResidency(i) for i in x))
 
-    def query_resourceresidency(self, resources: Sequence[IUnknownWrapper]) -> tuple[DXGI_RESIDENCY, ...]:
+    def query_resourceresidency(self, resources: Sequence[IUnknownWrapper]) -> tuple[DXGIResidency, ...]:
         return self.query_resourceresidency_nothrow(resources).value
 
-    def set_gputhreadpriority_nothrow(self, value: DXGI_RESOURCE_PRIORITY) -> ComResult[None]:
+    def set_gputhreadpriority_nothrow(self, value: DXGIResourcePriority) -> ComResult[None]:
         return cr(self.__o.SetGPUThreadPriority(int(value)), None)
 
     @property
-    def gputhreadpriority_nothrow(self) -> ComResult[DXGI_RESOURCE_PRIORITY]:
+    def gputhreadpriority_nothrow(self) -> ComResult[DXGIResourcePriority]:
         x = c_int32()
-        return cr(self.__o.GetGPUThreadPriority(byref(x)), DXGI_RESOURCE_PRIORITY(x.value))
+        return cr(self.__o.GetGPUThreadPriority(byref(x)), DXGIResourcePriority(x.value))
 
     @property
-    def gputhreadpriority(self) -> DXGI_RESOURCE_PRIORITY:
+    def gputhreadpriority(self) -> DXGIResourcePriority:
         return self.gputhreadpriority_nothrow.value
 
     @gputhreadpriority.setter
-    def gputhreadpriority(self, value: DXGI_RESOURCE_PRIORITY) -> None:
+    def gputhreadpriority(self, value: DXGIResourcePriority) -> None:
         self.set_gputhreadpriority_nothrow(value)
 
 

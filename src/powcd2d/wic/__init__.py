@@ -967,19 +967,19 @@ class WICBitmapDecoder:
     def wrapped_obj(self) -> c_void_p:
         return self.__o
 
-    def query_capability_nothrow(self, stream: ComStream) -> ComResult[WICBitmapDecoderCapabilities]:
+    def query_capability_nothrow(self, stream: ComStream) -> ComResult[WICBitmapDecoderCaps]:
         """ストリームのデコーダー機能を取得します。"""
         x = c_uint32()
-        return cr(self.__o.QueryCapability(stream.wrapped_obj, byref(x)), WICBitmapDecoderCapabilities(x.value))
+        return cr(self.__o.QueryCapability(stream.wrapped_obj, byref(x)), WICBitmapDecoderCaps(x.value))
 
-    def query_capability(self, stream: ComStream) -> WICBitmapDecoderCapabilities:
+    def query_capability(self, stream: ComStream) -> WICBitmapDecoderCaps:
         """ストリームのデコーダー機能を取得します。"""
         return self.query_capability_nothrow(stream).value
 
-    def initialize_nothrow(self, stream: ComStream, options: WICDecodeOptions | int) -> ComResult[None]:
+    def initialize_nothrow(self, stream: ComStream, options: WICDecodeOption | int) -> ComResult[None]:
         return cr(self.__o.Initialize(stream.wrapped_obj, int(options)), None)
 
-    def initialize(self, stream: ComStream, options: WICDecodeOptions | int) -> None:
+    def initialize(self, stream: ComStream, options: WICDecodeOption | int) -> None:
         return self.initialize_nothrow(stream, options).value
 
     @property
@@ -1196,7 +1196,7 @@ class WICImagingFactory:
         self,
         filename: str,
         access: FileAccess | int,
-        options: WICDecodeOptions | int,
+        options: WICDecodeOption | int,
         vendor_guid: GUID | None = None,
     ) -> ComResult[WICBitmapDecoder]:
         x = POINTER(IWICBitmapDecoder)()
@@ -1209,7 +1209,7 @@ class WICImagingFactory:
         self,
         filename: str,
         access: FileAccess | int,
-        options: WICDecodeOptions | int,
+        options: WICDecodeOption | int,
         vendor_guid: GUID | None = None,
     ) -> WICBitmapDecoder:
         return self.create_decoder_from_filename_nothrow(filename, access, options, vendor_guid).value
@@ -1217,7 +1217,7 @@ class WICImagingFactory:
     def create_decoder_from_stream_nothrow(
         self,
         stream: ComStream,
-        options: WICDecodeOptions | int,
+        options: WICDecodeOption | int,
         vendor_guid: GUID | None = None,
     ) -> ComResult[WICBitmapDecoder]:
         x = POINTER(IWICBitmapDecoder)()
@@ -1229,7 +1229,7 @@ class WICImagingFactory:
     def create_decoder_from_stream(
         self,
         stream: ComStream,
-        options: WICDecodeOptions | int,
+        options: WICDecodeOption | int,
         vendor_guid: GUID | None = None,
     ) -> WICBitmapDecoder:
         return self.create_decoder_from_stream_nothrow(stream, options, vendor_guid).value
@@ -1237,7 +1237,7 @@ class WICImagingFactory:
     def create_decoder_from_filehandle_nothrow(
         self,
         handle: int,
-        options: WICDecodeOptions | int,
+        options: WICDecodeOption | int,
         vendor_guid: GUID | None = None,
     ) -> ComResult[WICBitmapDecoder]:
         x = POINTER(IWICBitmapDecoder)()
@@ -1248,7 +1248,7 @@ class WICImagingFactory:
     def create_decoder_from_filehandle(
         self,
         handle: int,
-        options: WICDecodeOptions | int,
+        options: WICDecodeOption | int,
         vendor_guid: GUID | None = None,
     ) -> WICBitmapDecoder:
         return self.create_decoder_from_filehandle_nothrow(handle, options, vendor_guid).value
@@ -1337,30 +1337,30 @@ class WICImagingFactory:
         return self.create_bitmap_from_iconhandle_nothrow(icon_handle).value
 
     def create_componentenumerator_nothrow(
-        self, comptype: WICComponentType, options: WICComponentEnumerateOptions = WICComponentEnumerateOptions.DEFAULT
+        self, comptype: WICComponentType, options: WICComponentEnumOption = WICComponentEnumOption.DEFAULT
     ) -> ComResult[IUnknownEnumerator]:
         x = POINTER(IEnumUnknown)()
         return cr(self.__o.CreateComponentEnumerator(int(comptype), int(options), byref(x)), IUnknownEnumerator(x))
 
     def __create_componentenumerator(
-        self, comptype: WICComponentType, options: WICComponentEnumerateOptions = WICComponentEnumerateOptions.DEFAULT
+        self, comptype: WICComponentType, options: WICComponentEnumOption = WICComponentEnumOption.DEFAULT
     ) -> IUnknownEnumerator:
         return self.create_componentenumerator_nothrow(comptype, options).value
 
     def iter_infos(
-        self, comptype: WICComponentType, options: WICComponentEnumerateOptions = WICComponentEnumerateOptions.DEFAULT
+        self, comptype: WICComponentType, options: WICComponentEnumOption = WICComponentEnumOption.DEFAULT
     ) -> Iterator[WICComponentInfo]:
         for p in self.__create_componentenumerator(comptype, options):
             yield WICComponentInfo(p)
 
     def iter_infos_all(
-        self, options: WICComponentEnumerateOptions = WICComponentEnumerateOptions.DEFAULT
+        self, options: WICComponentEnumOption = WICComponentEnumOption.DEFAULT
     ) -> Iterator[WICComponentInfo]:
         for p in self.__create_componentenumerator(WICComponentType.ALL_COMPONENTS, options):
             yield WICComponentInfo(p)
 
     def iter_infos_encoder(
-        self, options: WICComponentEnumerateOptions = WICComponentEnumerateOptions.DEFAULT
+        self, options: WICComponentEnumOption = WICComponentEnumOption.DEFAULT
     ) -> Iterator[WICBitmapEncoderInfo]:
         for p in self.__create_componentenumerator(WICComponentType.ENCODER, options):
             yield WICBitmapEncoderInfo(p)
