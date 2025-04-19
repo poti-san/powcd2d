@@ -1,6 +1,11 @@
 powcd2d package
 ===============
 
+.. automodule:: powcd2d
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 Subpackages
 -----------
 
@@ -16,18 +21,7 @@ Subpackages
 Submodules
 ----------
 
-powcd2d.d3dmisc module
-----------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: powcd2d.d3dmisc
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-Module contents
----------------
-
-.. automodule:: powcd2d
-   :members:
-   :show-inheritance:
-   :undoc-members:
+   powcd2d.d3dmisc
